@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>报销处理--哈工大网络中心</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}"/>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="page-header">
+		<h1 class="text-center">哈工大网络中心报销管理 <small>请求管理</small></h1>
+		</div>
+		<ol class="breadcrumb">
+		  <li><a href="{% url 'deal_app' %}">处理报销请求</a></li>
+		  <li class="active">显示所有请求及管理</li>
+		  <li><a href="{% url 'backend' %}">报销查询及导出文件</a></li>
+		  <li><a href="{% url 'detail' %}">详情查询</a></li>
+		  <li><a href="{% url 'source' %}">管理经费卡及明细</a></li>
+		  <li><a href="{% url 'chpass' %}">修改密码</a></li>
+		  <li><a href="{% url 'logout' %}">退出</a></li>
+		</ol>
+
+		<table class="table table-hover">
+			<tr>
+				<td>日期</td>
+				<td>姓名</td>
+				<td>天数</td>
+				<td>科目</td>
+				<td>总金额</td>
+				<td>备注</td>
+				<td>状态</td>
+				<td>操作</td>
+			</tr>
+		{% for i in applications %}
+			<tr>
+				<td>{{ i.date | date:"SHORT_DATE_FORMAT"}}</td> 
+				<td>{{ i.name }}</td>
+				<td>{{ i.days }}</td>
+				<td>{{ i.category }}</td>
+				<td>{{ i.total }}</td>
+				<td>{{ i.others }}</td>
+				<td>{% if i.status == 0 %}
+				无效请求
+				{% elif i.status == 1 %}
+				待处理请求
+				{% else %}
+				已处理请求
+				{% endif %}
+				</td>
+				<form action="{% url 'adminrm_record' %}" method="POST">
+				{% csrf_token %}
+				<input type="text" name="appid" value="{{ i.id }}" hidden>
+				<td>
+					<button type="submit" class="btn btn-default">删除</button>
+				</td>
+			</form>
+				</td>
+			</tr>
+		{% endfor %}
+		</table>
+
+		<br>
+		<br>
+		<hr>
+		<footer class="text-right">
+		<p>&copy; 网络与信息中心</p>
+		<p>Carpela HIT CS</p>
+		<address>哈尔滨工业大学22号楼</address>
+		</footer>
+	</div>
+</body>
+</html>

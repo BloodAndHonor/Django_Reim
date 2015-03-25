@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>报销处理--哈工大网络中心</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}"/>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<script src="{% static 'jquery-ui/jquery-ui.js' %}"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'jquery-ui/jquery-ui.css' %}">
+</head>
+<body>
+	<div class="container">
+		<div class="page-header">
+		<h1 class="text-center">哈工大网络中心报销管理 <small>后台主页</small></h1>
+		</div>
+		<ol class="breadcrumb">
+		  <li><a href="{% url 'deal_app' %}">处理报销请求</a></li>
+		  <li><a href="{% url 'show' %}">显示所有请求及管理</a></li>
+		  <li><a href="{% url 'backend' %}">报销查询及导出文件</a></li>
+		  <li><a href="{% url 'detail' %}">详情查询</a></li>
+		  <li>管理经费卡及明细</li>
+		  <li><a href="{% url 'chpass' %}">修改密码</a></li>
+	  	  <li><a href="{% url 'logout' %}">退出</a></li>
+		</ol>
+		<hr/>
+		<h3 class="text-warning">所有明细：</h3>
+		<br>
+		<ul>
+		{% for i in detail %}
+			<li><h4>{{ i.source }}</h4></li>
+		{% endfor %}
+		</ul>
+		<br>
+		<form action="{% url 'source' %}" method="POST" class="form-inline">
+		{% csrf_token %}
+		<div class="form-group">
+			  <label for="inputSR">新来源:</label>
+			    <input type="text" name="source" class="form-control" id="inputSR">
+			  </div>
+			<button type="submit" class="btn btn-default">添加</button>
+		</form>
+		<hr/>
+		<h3 class="text-success">所有经费卡号：</h3>
+		<br>
+		<ul>
+		{% for i in funds %}
+			<li><h4>{{ i.credit }}</h4></li>
+		{% endfor %}
+		</ul>
+		<br>
+		<form action="{% url 'credit' %}" method="POST" class="form-inline">
+		{% csrf_token %}
+		<div class="form-group">
+			  <label for="inputCR">新经费卡号:</label>
+			    <input type="text" name="source" class="form-control" id="inputCR">
+			  </div>
+			<button type="submit" class="btn btn-default">添加</button>
+		</form>
+		<br>
+		<br>
+		<hr>
+		<footer class="text-right">
+		<p>&copy; 网络与信息中心</p>
+		<p>Carpela HIT CS</p>
+		<address>哈尔滨工业大学22号楼</address>
+		</footer>
+	</div>
+</body>
+</html>

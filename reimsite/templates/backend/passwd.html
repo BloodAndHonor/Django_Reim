@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>修改密码</title>
+
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/signin.css' %}"/>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script> 
+    <script type="text/javascript">
+    $(document).ready(function()
+    {
+      $("#chg").click(function()
+      {
+        if($("#inputPassword").val() != $("#inputPassword2").val())
+        {
+          alert("两次密码输入不一致");
+          return false;
+        }else return true;
+      });
+  });
+    </script>
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="page-header text-center">
+      <h1>哈工大网络中心财务报销管理后台</h1>
+      </div>
+      <form class="form-signin" action="{% url 'chpass' %}" method="POST">
+      {% csrf_token %}
+        <h2 class="form-signin-heading">修改密码 <small><a href="{% url 'backend' %}">返回后台主页</a></small></h2>
+        <label for="inputUN" class="sr-only">用户名</label>
+        <input type="text" id="inputUN" class="form-control" name="username" placeholder="username" required autofocus>
+        <label for="inputPassword" class="sr-only">新密码</label>
+        <input type="password" id="inputPassword" name="newpwd" class="form-control" placeholder="password" required>
+        <label for="inputPassword2" class="sr-only">重复密码</label>
+        <input type="password" id="inputPassword2" class="form-control" placeholder="password" required>
+        <button class="btn btn-lg btn-primary btn-block" id="chg" type="submit">确认修改</button>
+      </form>
+
+    </div>
+  </body>
+</html>

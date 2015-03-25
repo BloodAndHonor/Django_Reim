@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>哈工大网络中心财务报销管理平台</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}"/>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'mysite/header.css' %}"/>
+</head>
+<body>
+	<div class="container">
+
+	<div id="indexdiv">
+
+	<div id="inner">
+	<img src="{% static 'mysite/indexpic.jpg' %}" width="250" height="212">
+
+	<br>
+	<h1>哈工大网络中心财务报销管理平台</h1>
+	<hr/>
+	<a class="btn btn-primary btn-lg" href="{% url "apply" %}" role="button">报销申请</a>
+	&nbsp;&nbsp;
+
+	<a class="btn btn-primary btn-lg" href="{% url "login" %}" role="button">管理员入口</a>
+	<br>
+
+	</div>
+	</div>
+		<br>
+		<br>
+		<hr>
+		<footer class="text-right">
+		<p>&copy; 网络与信息中心</p>
+		<p>Carpela HIT CS</p>
+		<address>哈尔滨工业大学22号楼</address>
+		</footer>
+	</div>
+</body>
+</html>
