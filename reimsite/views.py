@@ -27,6 +27,8 @@ def add_record(request):
 		days = request.POST['days']
 		others = request.POST['others']
 		remain = request.POST['remain']
+		if days == "":
+			days = "0"
 		total = 180* int(days.encode('ascii'))
 
 		app = Application.objects.create(name=name, category=category, days=days, others=others, date=timezone.now(), remain=remain, total=total)
